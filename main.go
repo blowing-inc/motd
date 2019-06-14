@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -44,8 +45,13 @@ func quoteHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
+func refresh(w http.ResponseWriter, r *http.Request) {
+	os.Exit(3)
+}
+
 func main() {
 	// Http Server
-	http.HandleFunc("/quote", quoteHandler)
+	http.HandleFunc("/", quoteHandler)
+	http.HandleFunc("/refresh", refresh)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
