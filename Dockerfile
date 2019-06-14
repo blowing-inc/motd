@@ -3,7 +3,8 @@ FROM golang:1.12 AS builder
 COPY . /app
 WORKDIR /app
 RUN go get -d
-RUN packr build -o motd .
+RUN go get -u github.com/gobuffalo/packr/packr
+RUN packr build
 
 FROM alpine:latest
 WORKDIR /app
